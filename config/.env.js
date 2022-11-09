@@ -1,6 +1,6 @@
 export default {
   //URL: 'https://repositorio.colmex.mx/catalog.json?f%5Bthematic_collection_sim%5D%5B%5D=Movimientos+armados',
-  THEMATIC_URL: 'https://repositorio.colmex.mx/catalog.json?f%5Bthematic_collection_sim%5D%5B%5D=Cartillas+indígenas',
+  THEMATIC_URL: 'https://repositorio.colmex.mx/catalog.json?f%5Bmember_of_collections_ssim%5D%5B%5D=Libros+Colmex',
   //THEMATIC_URL: 'https://repositorio.colmex.mx/catalog.json?f%5Bthematic_collection_sim%5D%5B%5D=Estudios%20sobre%20América%20Latina%20y%20el%20Caribe',
   LINK_URL: 'https://repositorio.colmex.mx/catalog?f%5thematic_collection_sim%5D%5B%5D=Cartillas+indígenas',
   SHARE_URL: 'https://sandbox.colmex.mx/~ecisneros/movimientos/#/docs',
@@ -61,7 +61,7 @@ export default {
                   //"Generic Type",
                   "Type"
               ],
-  ARTICLE_FILTER: [
+  ARTICLE_FILTER: [ //Filtro para metadatos mostrados en la vista de registro o documento individual
                     "creator",
                     "resource_type",
                     //"identifier",

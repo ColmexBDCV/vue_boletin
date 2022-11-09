@@ -2408,6 +2408,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   }
 }
 
-.pdfViewer .page{
+/*.pdfViewer .page{
   width: 100% !important;
-}
+}*/

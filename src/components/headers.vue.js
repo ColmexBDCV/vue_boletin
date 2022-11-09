@@ -123,8 +123,8 @@ export default{
             //content: $("#popover-content").html()
 
         }
-        var exampleEl = document.getElementById('btn-advanced');
-        var popover = new bootstrap.Popover(exampleEl, options);
+        /*var exampleEl = document.getElementById('btn-advanced');
+        var popover = new bootstrap.Popover(exampleEl, options);*/
         //const popover = bootstrap.Popover.getOrCreateInstance('#btn-advanced'); // Returns a Bootstrap popover instance
         /*const myPopover = document.getElementById('btn-advanced');
         const popover = bootstrap.Popover.getInstance(myPopover); // Returns a Bootstrap popover instance

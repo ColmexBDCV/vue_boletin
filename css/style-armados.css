@@ -75,10 +75,10 @@ html,body{
 }
 
 body{
-    background: url(../src/assets/cartillas.jpeg) no-repeat center center fixed;
+    zbackground: url(../src/assets/cartillas.jpeg) no-repeat center center fixed;
     background-size: cover;
     font-family: 'Playfair Display', serif !important;
-    background-color: rgba(60, 60, 60, 0.96);
+    background-color: rgba(255, 255, 255, 0.96);
 }
 
 .header .movimientos{
@@ -97,6 +97,14 @@ body{
     width: 400px;
 }
 
+.splide__list{
+    margin-left: 6em !important;
+}
+
+.splide__pagination{
+    display: none !important;
+}
+
 .search-simple:focus{
     border: 0px solid #adadad;
     outline: none;
@@ -104,12 +112,12 @@ body{
 
 
 .logo img{
-    height: 45px;
+    height: 5em;
     vertical-align: sub;
 }
 
 .bg{
-    background-color: rgb(0 0 0 / 35%);
+    background-color: #FFFFFF;
 }
 
 .bg-pages{
@@ -142,11 +150,15 @@ body{
     /*color: var(--bg-color);*/
 }
 .about-page p{
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .about-page .title{
-    font-size: 35px;
+    font-size: 25px;
+}
+
+.about-header .title{
+    font-size: 3em;
 }
 /*Override Bootstrap colors*/
 

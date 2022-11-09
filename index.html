@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartillas Indigenas</title>
+    <title>Boletin SMGE</title>
 </head>
 
 <body class="body-special">
     <div id="app" style="height: 100%;">
         <router-view></router-view>
-        <footer>
+        <footer class="mt-5">
             <div> 
                 <div style="background-color: #F5F5F5; height: 100px; border-bottom: solid 3px #E5E4E3; text-align: center;"
                     class="p-3">
                     <img src="src/assets/bdcv_project.png" class="me-5" alt="">
-                    <img src="src/assets/footer_logo_instituto.png" alt="">
+                    <img src="src/assets/logo_boletin.svg" alt="" width="170" height="65">
                 </div>
                 <div style="background-color: #F5F5F5; height: 100px; text-align: center;" class="p-4">
                     <p>
@@ -59,221 +59,275 @@
         </div>
     </template>
     <template id="home">
-        <div class="bg" style="height: 100%;">
+        <div class="bg">
             <div
-                style="background-color: rgb(245 245 245); width: 100%; position: absolute; border-bottom: 5px solid #5E002B;">
+                style="background-color: #F5F5F5; width: 100%; position: relative; border-bottom: 2px solid #5E002B;">
                 <div class="container">
                     <headers :keyword="keyword" :pages="repo.pages" :filter="filter" :search_in="search_in"
                         is_page="false"></headers>
                 </div>
             </div>
+
+                <div class="text-center" style="background-image: url(src/assets/boletin_inicio.jpg); height: 350px;
+                        background-position: 60% center;
+                        background-size: cover;
+                        justify-content: center;
+                        align-items: center; position: relative;">
+                        <div style="margin: 0;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);">
+                            <p class="text-center" style="font-size: 2em; color: #FFFFFF; font-weight: bolder;">BOLETIN</p> 
+                            <p class="text_center" style="font-size: 2em; color: #FFFFFF; font-weight: bolder;" >MÁS RECIENTE</p>
+                            <button id="last" name="last-edition" class="btn btn-primary rounded-pill ps-5 pe-5">Ver más</button>
+                        </div>
+                </div>
+        
             <div class="container" style="height: 100%;">
-                <armados></armados>
+                <!--<armados></armados>-->
+                <grid :docs="repo.docs" ></grid>
             </div>
         </div>
     </template>
-    <template id="mainarmados">
-        <div class="first-search center">
-            <div class="title text-center"><strong>¡Bienvenido!</strong></div>
-            <div class="search-form">
-                <div class="row mt-2">
-                    <div class="col-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control search-input" :placeholder="$t('search_term')"
-                                v-model="search" name="keyword" @keyup.enter="send_data()" />
-                            <button class="btn btn-primary" type="button" @click="send_data()">
-                                <span class="material-icons">search</span> </button>
-                            <button class="btn btn-primary" v-on:click="show = !show" type="button"><span
-                                    class="material-icons">
-                                    more_horiz
-                                </span></button>
-                        </div>
-                        <transition name="fade">
-                            <div class="bg-dark  p-3 bg-advanced" v-if="show">
-                                <div class="col-md-auto mb-2">
-                                    <label for=""> Buscar en: </label>
-                                </div>
-                                <div class="col-md-auto">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio1" value="all_fields" checked v-model="search_in">
-                                        <label class="form-check-label" for="inlineRadio1">Todo</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio2" value="description" v-model="search_in">
-                                        <label class="form-check-label" for="inlineRadio2">Descripción</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio4" value="creator" v-model="search_in">
-                                        <label class="form-check-label" for="inlineRadio4">Autor</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio5" value="title" v-model="search_in">
-                                        <label class="form-check-label" for="inlineRadio5">Titulo</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </transition>
-
-                        <!--<input type="text" class="form-control search-input" :placeholder="$t('search_term')"
-                            v-model="search" name="keyword" @keyup.enter="send_data()" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-search" @click="send_data()">
-                                    <span class="glyphicon glyphicon-search"></span> {{$t('go')}}
-                                </button>
-                            </span>-->
-                    </div>
+    <template id="grid">
+        <div class="docs_view container">
+            <div class="row">
+                <div class="col-10 pt-5">
+                    <span class="material-symbols-outlined fs-4 pt-2" style="color:#5E002B">add_circle</span>
+                    <span class="fs-2">Otros Números</span>
                 </div>
-                <!--<div class="row mt-4">
-                        <div class="col-4">
-                            <label for="coleccion">Filtrar por colección:</label>
+            </div>
+            <div id="image-carousel" class="splide" aria-label="Beautiful Images">
+                <div class="splide__track">
+                      <ul class="splide__list">
+                        <li class="splide__slide" v-for="doc in docs">
+                            <div class="col-md-auto mt-5 mb-3">
+                                <img class="img-responsive" :src="get_url() + doc.thumbnail_path_ss " style="border-bottom: solid 4px var(--first-color);">
+                            </div>
+                            <router-link class="btn btn-primary rounded-pill " style="padding-left: 5em; padding-right: 5em; z-index: 9999;"
+                                :to="{path: 'docs', query: {id: doc.id, has_model: doc.has_model, thumbnail: doc.thumbnail_path_ss, related: doc.hasRelatedMediaFragment, keyword: keyword}}">
+                            <span class="ps-3 pe-3"> Ver Mas </span></router-link>
+                        </li>
+                      </ul>
+                </div>
+            </div> 
+        </div>
+    </template>
+    <template id="mainarmados">
+        <div>
+            <!--<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="src/assets/boletin_back.jpeg" class="d-block w-100" alt="...">
+                  </div>
+                </div>
+            </div>-->
+            <div class="first-search center">
+                <div class="search-form">
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control search-input" :placeholder="$t('search_term')"
+                                    v-model="search" name="keyword" @keyup.enter="send_data()" />
+                                <button class="btn btn-primary" type="button" @click="send_data()">
+                                    <span class="material-icons">search</span> </button>
+                                <button class="btn btn-primary" v-on:click="show = !show" type="button"><span
+                                        class="material-icons">
+                                        more_horiz
+                                    </span></button>
+                            </div>
+                            <transition name="fade">
+                                <div class="bg-dark  p-3 bg-advanced" v-if="show">
+                                    <div class="col-md-auto mb-2">
+                                        <label for=""> Buscar en: </label>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio1" value="all_fields" checked v-model="search_in">
+                                            <label class="form-check-label" for="inlineRadio1">Todo</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio2" value="description" v-model="search_in">
+                                            <label class="form-check-label" for="inlineRadio2">Descripción</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio4" value="creator" v-model="search_in">
+                                            <label class="form-check-label" for="inlineRadio4">Autor</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio5" value="title" v-model="search_in">
+                                            <label class="form-check-label" for="inlineRadio5">Titulo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </transition>
+
+                            <!--<input type="text" class="form-control search-input" :placeholder="$t('search_term')"
+                                v-model="search" name="keyword" @keyup.enter="send_data()" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-search" @click="send_data()">
+                                        <span class="glyphicon glyphicon-search"></span> {{$t('go')}}
+                                    </button>
+                                </span>-->
                         </div>
-                        <div class="col-8">
-                            <select v-model="collection" class="form-select" name="coleccion" id="coleccion">
-                                <option value="todo" >Todo</option>
-                                <option value="tesis">Tesis</option>
-                            </select>
+                    </div>
+                    <!--<div class="row mt-4">
+                            <div class="col-4">
+                                <label for="coleccion">Filtrar por colección:</label>
+                            </div>
+                            <div class="col-8">
+                                <select v-model="collection" class="form-select" name="coleccion" id="coleccion">
+                                    <option value="todo" >Todo</option>
+                                    <option value="tesis">Tesis</option>
+                                </select>
+                            </div>
+                        </div>-->
+                    <div class="row ">
+                        <div class="col-12">
+
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="d-grid gap-2 fw-bolder">
+                                <p>Explore más de 600 cartillas de lectoescritura publicadas en México
+                                    desde 1940 hasta 1980. Creado en conjunto por la Biblioteca Daniel Cosío Villegas del
+                                    COLMEX y el Instituto Linguistico de Verano, A.C.
+                                </p>
+                                <!--<button type="button" class="btn btn-primary" @click="send_data">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </button>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="row mt-5 justify-content-center">
+                        <div class="col-12">
+                            <ul class="nav nav-search">
+                                <li class="nav-item">
+                                    <!--<a class="nav-link" href="/search">Ver Todo</a>-->
+                    <!--<router-link class="nav-link" to="search">Ver Todo</router-linkv>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link class="nav-link" to="personas">Personas Mencionadas</router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link class="nav-link" to="about">Sobre el Sitio</router-linkv>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <img src="./src/assets/logo-colmex.png" height="75" width="200" class="rounded mx-auto d-block"
+                                alt="COLMEX">
                         </div>
                     </div>-->
-                <div class="row ">
-                    <div class="col-12">
-
-                    </div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-12">
-                        <div class="d-grid gap-2 fw-bolder">
-                            <p>Explore más de 600 cartillas de lectoescritura publicadas en México
-                                desde 1940 hasta 1980. Creado en conjunto por la Biblioteca Daniel Cosío Villegas del
-                                COLMEX y el Instituto Linguistico de Verano, A.C.
-                            </p>
-                            <!--<button type="button" class="btn btn-primary" @click="send_data">
-                                <span class="glyphicon glyphicon-search"></span> Buscar
-                            </button>-->
-                        </div>
-                    </div>
-                </div>
-                <!--<div class="row mt-5 justify-content-center">
-                    <div class="col-12">
-                        <ul class="nav nav-search">
-                            <li class="nav-item">
-                                <!--<a class="nav-link" href="/search">Ver Todo</a>-->
-                <!--<router-link class="nav-link" to="search">Ver Todo</router-linkv>
-                            </li>
-                            <li class="nav-item">
-                                <router-link class="nav-link" to="personas">Personas Mencionadas</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link class="nav-link" to="about">Sobre el Sitio</router-linkv>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <img src="./src/assets/logo-colmex.png" height="75" width="200" class="rounded mx-auto d-block"
-                            alt="COLMEX">
-                    </div>
-                </div>-->
             </div>
         </div>
     </template>
     <template id="headers">
-        <div class="" style="background-color: #F5F5F5;">
+        <div class="pt-4 pb-4" style="background-color: #F5F5F5;">
             <div class="row header">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">
-                            <span class="logo"><img src="src/assets/logo_cartillas.svg" alt=""
-                                    class="d-inline-block align-text-top"></span></a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-start">
-                                <li class="nav-item">
-                                    <router-link class="nav-link" to="/">INICIO</router-link>
-                                    <!--<a class="nav-link " aria-current="page" href="#">Inicio</a>-->
-                                </li>
-                                <li class="nav-item">
-                                    <router-link class="nav-link" to="about">EL PROYECTO</router-link>
-                                    <!--<a class="nav-link" href="#">Sobre el sitio</a>-->
-                                </li>
-                                <li class="nav-item">
-                                    <!--<router-link class="nav-link" @click="reload()" to="">Ver Todo</router-link>-->
-                                    <a class="nav-link " @click="reload()" href="./#/search">EXPLORAR</a>
-                                </li>
-                                <li class="nav-item">
-                                    <router-link class="nav-link" to="maps">MAPA</router-link>
-                                    <!--<a class="nav-link " href="#">Personas Mencionadas</a>-->
-                                </li>
-                                <li class="nav-item">
-                                    <router-link class="nav-link" to="personas">CONTACTAR</router-link>
-                                    <!--<a class="nav-link " href="#">Personas Mencionadas</a>-->
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="divsearch">
-                            <input type="search" @keyup.enter="get_search" class="globalsearch" style="width: 70%;"
-                                placeholder="Búsqueda" v-model="search" name="lname" />
-                            <button type="button" @click="get_search" class="btn-globalsearch"><span class="material-icons">
-                                    search
-                                </span></button>
-                            <button type="button" id="btn-advanced" class="btn-globalsearch btn-advanced" 
-                                data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom">
-                                <span class="material-icons">
-                                    more_horiz
-                                </span>
+                <div class="float-start col-3">
+                    <span class="logo"><img src="src/assets/logo_boletin.svg" alt=""
+                        class="d-inline-block align-text-top"></span>
+                </div>
+                <div class="float-end col-9">
+                    <nav class="navbar navbar-expand-lg navbar-light float-end">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="#">
+                                </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div hidden>
-                                <div class="hide" data-name="popover-content" id="optionsearch">
-                                    <div class="card card-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="optionRadios"
-                                                id="radio_all" value="all_fields" v-model="lcl_search" checked>
-                                            <label class="form-check-label" for="radio_all">
-                                                Todo
-                                            </label>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-start">
+                                    <li class="nav-item">
+                                        <router-link class="nav-link" to="/">INICIO</router-link>
+                                        <!--<a class="nav-link " aria-current="page" href="#">Inicio</a>-->
+                                    </li>
+                                    <li class="nav-item">
+                                        <router-link class="nav-link" to="about">SOBRE</router-link>
+                                        <!--<a class="nav-link" href="#">Sobre el sitio</a>-->
+                                    </li>
+                                    <li class="nav-item">
+                                        <!--<router-link class="nav-link" @click="reload()" to="">Ver Todo</router-link>-->
+                                        <a class="nav-link " @click="reload()" href="./#/search">NÚMEROS ANTERIORES</a>
+                                    </li>
+                                    <!--<li class="nav-item">
+                                        <router-link class="nav-link" to="maps">MAPA</router-link>
+                                    </li>-->
+                                    <li class="nav-item">
+                                        <router-link class="nav-link" to="personas">CONTACTO</router-link>
+                                        <!--<a class="nav-link " href="#">Personas Mencionadas</a>-->
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--<div class="divsearch">
+                                <input type="search" @keyup.enter="get_search" class="globalsearch" style="width: 70%;"
+                                    placeholder="Búsqueda" v-model="search" name="lname" />
+                                <button type="button" @click="get_search" class="btn-globalsearch"><span class="material-icons">
+                                        search
+                                    </span></button>
+                                <button type="button" id="btn-advanced" class="btn-globalsearch btn-advanced" 
+                                    data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom">
+                                    <span class="material-icons">
+                                        more_horiz
+                                    </span>
+                                </button>
+                                <div hidden>
+                                    <div class="hide" data-name="popover-content" id="optionsearch">
+                                        <div class="card card-body">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="optionRadios"
+                                                    id="radio_all" value="all_fields" v-model="lcl_search" checked>
+                                                <label class="form-check-label" for="radio_all">
+                                                    Todo
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" v-model="lcl_search" name="optionRadios"
+                                                    id="radio_desc" value="description">
+                                                <label class="form-check-label" for="radio_desc">
+                                                    Descripción
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" v-model="lcl_search" name="optionRadios"
+                                                    id="radio_auth" value="creator">
+                                                <label class="form-check-label" for="radio_auth">
+                                                    Autor
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" v-model="lcl_search" name="optionRadios"
+                                                    id="radio_title" value="title">
+                                                <label class="form-check-label" for="radio_title">
+                                                    Titulo
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" v-model="lcl_search" name="optionRadios"
-                                                id="radio_desc" value="description">
-                                            <label class="form-check-label" for="radio_desc">
-                                                Descripción
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" v-model="lcl_search" name="optionRadios"
-                                                id="radio_auth" value="creator">
-                                            <label class="form-check-label" for="radio_auth">
-                                                Autor
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" v-model="lcl_search" name="optionRadios"
-                                                id="radio_title" value="title">
-                                            <label class="form-check-label" for="radio_title">
-                                                Titulo
-                                            </label>
-                                        </div>
+                                        <router-link to="advanced">Ir a busqueda avanzada</router-link>
                                     </div>
-                                    <router-link to="advanced">Ir a busqueda avanzada</router-link>
-                                </div>
-                            </div>                            
+                                </div>                            
+                            </div>-->
                         </div>
-                    </div>
-                </nav>
+                    </nav>
+                </div>
             </div>
         </div>
     </template>
     <template id="searchview">
         <div style="min-height: 80%; background-color: #FFFFFF;">
-            <div style="background-color: rgb(245 245 245); width: 100%; border-bottom: 5px solid #5E002B;">
+            <div style="background-color: rgb(245 245 245); width: 100%; border-bottom: 2px solid #5E002B;">
                 <div class="container">
                     <headers :keyword="keyword" :pages="repo.pages" :filter="filter" :search_in="search_in"
                         is_page="false" :json_data="json_data"></headers>
@@ -283,7 +337,7 @@
                 <div class="container" style="height: 100%;">
                     <div class="contained">
                         <div class="row">
-                            <div class="col-3 col-normal">
+                            <!--<div class="col-3 col-normal">
                                 <facets :facets="repo.facets" :type="this.type" :val="this.val" :label="this.label"
                                     :params="this.params">
                                 </facets>
@@ -292,8 +346,8 @@
                                 <facets :facets="repo.facets" :type="this.type" :val="this.val" :label="this.label"
                                     :params="this.params">
                                 </facets>
-                            </div>
-                            <div class="col-9 show-all">
+                            </div>-->
+                            <div class="col-12 show-all">
                                 <!--<search :keyword="keyword" :pages="repo.pages"></search>-->
                                 <helperbar :pages="repo.pages" ref="pagination" :total="repo.total_pages"></helperbar>
                                 <docs :docs="repo.docs"></docs>
@@ -308,39 +362,24 @@
         </div>
     </template>
     <template id="docs">
-        <div class="docs_view container">
-            <div class="row" v-for="doc in docs">
-                <router-link class="mt-5 mb-3"
+        <div class="docs_view">
+            <div class="row">
+                <!--<router-link class="mt-5 mb-3"
                     :to="{path: 'docs', query: {id: doc.id, has_model: doc.has_model, thumbnail: doc.thumbnail_path_ss, related: doc.hasRelatedMediaFragment, keyword: keyword}}">
                     <h6> <strong>{{ doc.title[0] }}</strong> </h6>
-                </router-link>
+                </router-link>-->
                 <!--<div class="bd-highlight">-->
-                <div class="col-md-auto">
-                    <router-link
-                        :to="{path: 'docs', query: {id: doc.id, has_model: doc.has_model, thumbnail: doc.thumbnail_path_ss, related: doc.hasRelatedMediaFragment, keyword: keyword}}">
+                <div class="col-md-4 mt-4 mb-5" v-for="doc in docs">
+                    <!--<router-link
+                        :to="{path: 'docs', query: {id: doc.id, has_model: doc.has_model, thumbnail: doc.thumbnail_path_ss, related: doc.hasRelatedMediaFragment, keyword: keyword}}">-->
                         <img class="img-responsive" :src="get_url() + doc.thumbnail_path_ss ">
-                    </router-link>
+                    <!--</router-link>-->
+
+                    <router-link class="btn btn-primary rounded-pill mt-3 ms-2" style="padding-left: 5em; padding-right: 5em; z-index: 9999;"
+                                :to="{path: 'docs', query: {id: doc.id, has_model: doc.has_model, thumbnail: doc.thumbnail_path_ss, related: doc.hasRelatedMediaFragment, keyword: keyword}}">
+                            <span class="ps-3 pe-3"> Ver Mas </span></router-link>
                 </div>
-                <div class="col-md-auto justify-content-md-center">
-                    <!--<table class="table table-docs">
-                        <tbody>
-                            <tr v-for="(metadata, key, index) in doc" v-if="check_metadata(metadata, key)">
-                                <th class="td-tittle" style="text-align: right;">
-                                    {{ $t(key) }}
-                                </th>
-                                <td v-if="isObject(metadata)" style="text-align: left;">
-                                    <p v-for="m in metadata">
-                                        {{ m }}
-                                    </p>
-                                </td>
-                                <td v-else style="text-align: left;">
-                                    <p>
-                                        {{ metadata }}
-                                    </p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>-->
+                <!--<div class="col-md-auto justify-content-md-center">
                     <div class="row" v-for="(metadata, key, index) in doc" v-if="check_metadata(metadata, key)">
                         <div class="td-tittle col-5" style="text-align: right;">
                             {{ $t(key) }}
@@ -357,8 +396,7 @@
                         </div>
 
                     </div>
-                </div>
-                <!--</div>-->
+                </div>-->
             </div>
         </div>
     </template>
@@ -620,6 +658,8 @@
 </body>
 
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="css/splide.min.css">
+<link rel="stylesheet" href="css/themes/splide-default.min.css">
 <!--<link rel="stylesheet" type="text/css" href="/public/js/vue/src/assets/style.css">-->
 <script type="text/javascript" src="https://www.w3schools.com/lib/w3data.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-i18n/8.14.1/vue-i18n.js"></script>
@@ -663,7 +703,7 @@
     crossorigin="anonymous"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPbdLVfBy79lwLRuStHHH9KQsoBvxj5eE" async></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js" async></script>
-<!--</script>-->
+<script src="js/splide.min.js"></script>
 <!--<script type="text/javascript"
         src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>-->
 <!--<script type="text/javascript"
@@ -671,6 +711,14 @@
 
 <script>
     w3IncludeHTML();
+
+    /*document.addEventListener( 'DOMContentLoaded', function() {
+        var splide = new Splide( '.splide', {
+        perPage: 3,
+        rewind : true,
+        });
+        splide.mount();
+    } );*/
 </script>
 <script type="module" src="functions.js"></script>
 <script type="module" src="main.js"></script>
